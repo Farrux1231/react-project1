@@ -9,6 +9,7 @@ const Card = ({item}) => {
         </div>
         <div className='py-[13px]'>
             <h3>{item.title}</h3>
+            
         </div>
     </div>
   )

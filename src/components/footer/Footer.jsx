@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../assets/logo.svg'
 import playMarket from '../../assets/playMarket.png'
-import AppStore from '../../assets/appStore.jpg'
+import AppStore from '../../assets/AppStore.jpg'
 import { LiaPollHSolid } from "react-icons/lia";
 
 const Footer = () => {
