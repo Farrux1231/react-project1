@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import logo from '../../assets/logo.svg'
 import {AfishaIcon, SiansIcon, TicketIcon, SearchIcon} from '../../icons/Icons'
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   return (
         <>
       <nav className="bg-black text-white p-[20px] text-4xl">
@@ -14,7 +16,7 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-6 text-sm">
-            <li className="hover:text-red-500 cursor-pointer"><AfishaIcon /></li>
+            <li className="hover:text-red-500 cursor-pointer" onClick={()=>navigate(`/movies`)}><AfishaIcon /></li>
             <li className="hover:text-red-500 cursor-pointer"><SiansIcon /></li>
             <li className="hover:text-red-500 cursor-pointer"><TicketIcon /></li>
             <li className="hover:text-red-500 cursor-pointer"><SearchIcon /></li>

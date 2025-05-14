@@ -1,8 +1,18 @@
-import React from 'react'
+import Genres from '@/components/genres/Genres'
+import MovieView from '@/components/movie-view/MovieView'
+import Slide from '@/components/Slide/Slide'
+import { useFetch } from '@/hooks/useFetch'
+import React, { useState } from 'react'
 
 const Movies = () => {
+  const [genre, setGenre] = useState("")
+  const {data, error, loading} = useFetch("/discover/movie", {page: 3, with_genres:genre, without_genres:"18, 10749, 36"})
   return (
-    <div>Movies</div>
+    <div>
+      <Genres setGenre={setGenre}/>
+      <MovieView movies={data?.results}/>
+      {loading}
+    </div>
   )
 }
 

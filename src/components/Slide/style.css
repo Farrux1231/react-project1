@@ -1,0 +1,90 @@
+.slide{
+  width: 80%;
+  margin: auto;
+}
+
+.slide-container {
+  position: relative;
+  
+}
+
+/* Rasm uchun uslub */
+.slide-image {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Informatsiya konteyneri */
+.slide-info {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  position: absolute;
+  bottom: 20px; /* Pastki qismga yaqin joylashtiriladi */
+  left: 50%; 
+  transform: translateX(-50%); 
+  background: rgba(0, 0, 0, 0.7); /* Yarim shaffof qora fon */
+  color: white;
+  padding: 20px; 
+  border-radius: 10px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Yumshoq soyalar */
+}
+
+/* Informatsiya ichidagi ikkinchi qatlam */
+.second {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0;
+}
+
+/* Matn va tugma uslublari */
+.slide-info h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.slide-info p {
+  margin: 5px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Ikonalar va matn orasidagi masofa */
+}
+
+.watch-button {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.watch-button:hover {
+  background-color: #cc0000;
+}
+
+/* Thumb slayd uslubi */
+.thumb-image {
+  border-radius: 18px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.thumb-image-active{
+  border: #ffff;
+}
+.mySwiper{
+  margin-top: 10px;
+  width: 50%;
+  /* border-radius: 18px; */
+}
