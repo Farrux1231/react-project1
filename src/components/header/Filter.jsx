@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const Filter = () => {
-  const [params, setParams] = useSearchParams();
-  const [filterName, setFilterName] = useState(params.get("filter") || "");
+  const [params, setParams] = useSearchParams("");
+  const [filterName, setFilterName] = useState(params.get("name") || "");
+  const [query, setQuery] = useState("")
+
+  const Query = (name) =>{
+    console.log(name.target.value);
+    setParams("name")
+    params.set("name", name.target.value)
+  }
+  
 
   const handleFilter = (name) => {
     if(name === "All"){
@@ -22,13 +30,16 @@ const Filter = () => {
 
   return (
     <div className="flex gap-5 justify-center items-center py-3">
+      <div>
+        <input type="text" value={query} onChange={Query}/>
+      </div>
       <div
         className={`cursor-pointer ${filterName === "All" ? "text-blue-500 " : ""}`}
         onClick={() => handleFilter("All")}
       >
         All
       </div>
-      <div
+      {/* <div
         className={`cursor-pointer ${filterName === "New" ? "text-blue-500 " : ""}`}
         onClick={() => handleFilter("New")}
       >
@@ -39,7 +50,7 @@ const Filter = () => {
         onClick={() => handleFilter("Old")}
       >
         Old
-      </div>
+      </div> */}
     </div>
   );
 };

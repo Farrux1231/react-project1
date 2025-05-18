@@ -1,95 +1,169 @@
-import React, { useState } from 'react'
-import logo from '../../assets/logo.svg'
-import {AfishaIcon, SiansIcon, TicketIcon, SearchIcon} from '../../icons/Icons'
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { IoHomeOutline, IoBookmarkOutline, IoSearchOutline } from "react-icons/io5";
+import { MdOutlineMovie } from "react-icons/md";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import logo from "../../assets/logo.svg";
+import { NavLink } from "react-router-dom";
+import "./style.css";
+import { useStateValue } from "@/context";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate()
+  const [state, dispatch] = useStateValue();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-        <>
-      <nav className="bg-black text-white p-[20px] text-4xl">
-        <div className="container mx-auto flex items-center justify-between px-4">
-          <div className="flex items-center space-x-2">
-            <img src={logo} alt="Logo" className="h-8" />
-          </div>
-
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-6 text-sm">
-            <li className="hover:text-red-500 cursor-pointer" onClick={()=>navigate(`/movies`)}><AfishaIcon /></li>
-            <li className="hover:text-red-500 cursor-pointer"><SiansIcon /></li>
-            <li className="hover:text-red-500 cursor-pointer"><TicketIcon /></li>
-            <li className="hover:text-red-500 cursor-pointer"><SearchIcon /></li>
-          </ul>
-
-          <div className="hidden md:flex items-center space-x-6">
-            <select className="bg-[#1D1D1D80] rounded-[10px] text-sm px-4 py-3">
-              <option>Rus</option>
-              <option>Uzb</option>
-            </select>
-            <button className="bg-red-600 hover:bg-red-700 text-white text-sm px-8 py-2.5 rounded-[10px]">
-              Войти
-            </button>
-          </div>
-
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(true)} className="focus:outline-none">
-              <div className="space-y-1">
-                <span className="block w-6 h-0.5 bg-white"></span>
-                <span className="block w-6 h-0.5 bg-white"></span>
-                <span className="block w-6 h-0.5 bg-white"></span>
-              </div>
-            </button>
-          </div>
+    <nav className="bg-black text-white p-[20px] text-4xl">
+      <div className="container mx-auto flex items-center justify-between px-4">
+        <div className="flex items-center space-x-2">
+          <img src={logo} alt="Logo" className="h-8" />
         </div>
-      </nav>
 
-      <div
-        className={`fixed top-0 left-0 w-64 h-full bg-black text-white z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="p-5 flex flex-col space-y-6 text-sm">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="self-end text-white text-xl"
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-16">
+          <NavLink className="flex flex-col items-center header-link" to="/">
+            <IoHomeOutline className="text-2xl" />
+            <span className="text-[17px]">
+              {state.lang === "en"
+                ? "Home"
+                : state.lang === "uz"
+                ? "Asosiy"
+                : state.lang === "ru"
+                ? "Главный"
+                : "Home"}
+            </span>
+          </NavLink>
+          <NavLink className="flex flex-col items-center header-link" to="/movies">
+            <MdOutlineMovie className="text-2xl" />
+            <span className="text-[17px]">
+              {state.lang === "en"
+                ? "Movie"
+                : state.lang === "uz"
+                ? "Kino"
+                : state.lang === "ru"
+                ? "Фильм"
+                : "Movie"}
+            </span>
+          </NavLink>
+          <NavLink className="flex flex-col items-center header-link" to="/saved">
+            <IoBookmarkOutline className="text-2xl" />
+            <span className="text-[17px]">
+              {state.lang === "en"
+                ? "Saved"
+                : state.lang === "uz"
+                ? "Saqlangan"
+                : state.lang === "ru"
+                ? "Сохранить"
+                : "Saved"}
+            </span>
+          </NavLink>
+          <NavLink className="flex flex-col items-center header-link" to="/search/movie">
+            <IoSearchOutline className="text-2xl" />
+            <span className="text-[17px]">
+              {state.lang === "en"
+                ? "Search"
+                : state.lang === "uz"
+                ? "Qidiruv"
+                : state.lang === "ru"
+                ? "Поиск"
+                : "Search"}
+            </span>
+          </NavLink>
+        </div>
+
+        <div className="hidden md:block">
+          <select
+            name="language"
+            id="language"
+            onChange={(e) => dispatch({ type: "change", payload: e.target.value })}
+            className="bg-gray-800 text-white p-1 rounded-[7px] w-28 h-10 text-sm"
           >
-            ✕
-          </button>
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="uz">O‘zbek</option>
+          </select>
+        </div>
 
-          {/* Icons and Options */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2 cursor-pointer hover:text-red-500">
-              <AfishaIcon />
-              <span className='mb-[10px]'>Afisha</span>
-            </div>
-            <div className="flex items-center space-x-2 cursor-pointer hover:text-red-500">
-              <SiansIcon />
-              <span className='mb-[10px]'>Sians</span>
-            </div>
-            <div className="flex items-center space-x-2 cursor-pointer hover:text-red-500">
-              <TicketIcon />
-              <span className='mb-[10px]'>Tickets</span>
-            </div>
-            <div className="flex items-center space-x-2 cursor-pointer hover:text-red-500">
-              <SearchIcon />
-              <span className='mb-[10px]'>Search</span>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-gray-600">
-            <select className="bg-[#1D1D1D80] rounded-[10px] text-sm px-4 py-3 w-full mt-2">
-              <option>Rus</option>
-              <option>Uzb</option>
-            </select>
-            <button className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2.5 rounded-[10px]">
-              Войти
-            </button>
-          </div>
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden">
+          <HiOutlineMenuAlt3 className="text-2xl cursor-pointer" onClick={toggleMenu} />
         </div>
       </div>
-    </>
-  )
-}
 
-export default Navbar
+      {/* Mobile Sidebar */}
+      {isMenuOpen && (
+        <div className="fixed top-0 left-0 h-full w-[250px] bg-black text-white shadow-lg z-50 flex flex-col p-4 space-y-4">
+          <button
+            className="self-end text-2xl mb-4"
+            onClick={toggleMenu}
+          >
+            ✖
+          </button>
+          <NavLink className="flex items-center space-x-4" to="/" onClick={toggleMenu}>
+            <IoHomeOutline className="text-xl" />
+            <span className="text-[22px]">
+              {state.lang === "en"
+                ? "Home"
+                : state.lang === "uz"
+                ? "Asosiy"
+                : state.lang === "ru"
+                ? "Главный"
+                : "Home"}
+            </span>
+          </NavLink>
+          <NavLink className="flex items-center space-x-4" to="/movies" onClick={toggleMenu}>
+            <MdOutlineMovie className="text-xl" />
+            <span className="text-[22px]">
+              {state.lang === "en"
+                ? "Movie"
+                : state.lang === "uz"
+                ? "Kino"
+                : state.lang === "ru"
+                ? "Фильм"
+                : "Movie"}
+            </span>
+          </NavLink>
+          <NavLink className="flex items-center space-x-4" to="/saved" onClick={toggleMenu}>
+            <IoBookmarkOutline className="text-xl" />
+            <span className="text-[22px]">
+              {state.lang === "en"
+                ? "Saved"
+                : state.lang === "uz"
+                ? "Saqlangan"
+                : state.lang === "ru"
+                ? "Сохранить"
+                : "Saved"}
+            </span>
+          </NavLink>
+          <NavLink className="flex items-center space-x-4" to="/search/movie" onClick={toggleMenu}>
+            <IoSearchOutline className="text-xl" />
+            <span className="text-[22px]">
+              {state.lang === "en"
+                ? "Search"
+                : state.lang === "uz"
+                ? "Qidiruv"
+                : state.lang === "ru"
+                ? "Поиск"
+                : "Search"}
+            </span>
+          </NavLink>
+          <select
+            name="language"
+            id="language"
+            onChange={(e) => dispatch({ type: "change", payload: e.target.value })}
+            className="bg-gray-800 text-white p-1 rounded-[7px] w-full text-sm h-[40px]"
+          >
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="uz">O‘zbek</option>
+          </select>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

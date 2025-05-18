@@ -36,7 +36,7 @@ const MainRouters = () => {
           ),
         },
         {
-          path: "/search",
+          path: "/search/movie",
           element: (
             <Suspense>
               <Search />
