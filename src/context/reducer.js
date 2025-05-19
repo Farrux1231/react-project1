@@ -3,7 +3,8 @@ export const initialState = store || {
     count:0,
     saved:[],
     token:null,
-    lang:null
+    lang:null,
+    bgColor:null
 }
 
 export const reducer = (state, action) => {
@@ -21,6 +22,8 @@ export const reducer = (state, action) => {
             }
             localStorage.setItem("store", JSON.stringify(store))
             return store
+        case "bg":
+            return {...state, bgColor: state.bgColor = action.payload}
         default:
             return state
     }
